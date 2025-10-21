@@ -1,0 +1,29 @@
+# ===========================
+# Netlify Deployment Settings
+# ===========================
+
+[build]
+  base = "frontend"
+  publish = "frontend/dist"
+  command = "npm install && npm run build"
+
+# Environment variables to load from Netlify dashboard (secured)
+# PAYSTACK_PUBLIC_KEY, CLOUDINARY_NAME, etc. are stored in Netlify > Site Settings > Environment Variables
+[build.environment]
+  NODE_VERSION = "22.16.0"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# ======== Redirects =========
+# Handles React Router routes (SPA fallback)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# ======== Headers ===========
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
