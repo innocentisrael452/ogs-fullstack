@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ogs-api
+    env: node
+    plan: free
+    branch: main
+    repo: https://github.com/ogs-developer/ogs-fullstack.git
+    buildCommand: 'npm install --prefix server'
+    startCommand: 'node server/index.js'
