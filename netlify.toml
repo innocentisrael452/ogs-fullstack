@@ -1,3 +1,8 @@
+# ============================
+# Okrika Grammar School (OGS)
+# Netlify Production Build Config
+# ============================
+
 [build]
   base = "frontend"
   publish = "frontend/dist"
@@ -5,4 +10,19 @@
 
 [build.environment]
   NODE_VERSION = "22.16.0"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
+# Optional caching to speed up builds
+[build.processing]
+  skip_processing = true
+
+# Fallback detection (in case Netlify updates environments)
+[context.production.environment]
+  NODE_VERSION = "22.16.0"
+
+# Redirect all routes to index.html (for SPA)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
